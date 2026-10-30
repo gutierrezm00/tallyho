@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noai, noimageai">
+<title>Data Retention and Deletion · Tallyho</title>
+<meta name="description" content="Tallyho is a private, single-user personal finance application. Its privacy policy and security policies.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">T</span>Tallyho</a>
+    <nav aria-label="Pages"><a href="index.html">About</a><a href="privacy.html">Privacy</a><a href="security.html">Security</a><a href="access-control.html">Access control</a><a href="retention.html" aria-current="page">Retention</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<h1>Data Retention and Deletion</h1>
+<p class="meta">Version 1.0 · Effective October 29, 2026 · Next review October 2027</p>
+
+<p>Tallyho keeps consumer financial data only while it is connected and in use, and deletes it, at Plaid and locally, when a connection is removed. This policy covers every copy of data Tallyho receives from Plaid or imports from files: the live data, backups, logs, reports and exports.</p>
+
+<h2 id="data">1. Data covered</h2>
+<p>All consumer data in Tallyho belongs to the operator. Tallyho holds no data about anyone else.</p>
+<div class="table"><table>
+  <tr><th>Data</th><th>Source</th></tr>
+  <tr><td>Connection credentials, one per connected institution</td><td>Plaid</td></tr>
+  <tr><td>Account names, types, masked numbers and balances</td><td>Plaid, manual entry</td></tr>
+  <tr><td>Transactions: date, amount, merchant, category</td><td>Plaid, statement import</td></tr>
+  <tr><td>Card and loan terms: interest rate, minimum payment, due date</td><td>Plaid, manual entry</td></tr>
+  <tr><td>Investment holdings and securities</td><td>Plaid</td></tr>
+  <tr><td>Categories, rules, budgets, goals and alerts</td><td>Created in Tallyho</td></tr>
+  <tr><td>Reports, monthly summaries and exports</td><td>Generated from the above</td></tr>
+</table></div>
+<p>Tallyho does not store bank usernames or passwords. Those are entered only in Plaid Link and never reach Tallyho.</p>
+
+<h2 id="storage">2. Where data is stored</h2>
+<p>All data stays on the operator's own computer, which uses full-disk encryption. Nothing is synced to a cloud service. The data and backups are readable only by the operator's account, connection credentials and backups are encrypted a second time, and logs hold job status only, never credentials or transactions.</p>
+
+<h2 id="periods">3. Retention periods</h2>
+<div class="table"><table>
+  <tr><th>Data</th><th>Kept for</th><th>Then</th></tr>
+  <tr><td>Connection credentials</td><td>While the institution is connected</td><td>Revoked at Plaid and deleted</td></tr>
+  <tr><td>Accounts, transactions, balances, card and loan terms, holdings</td><td>While the institution is connected</td><td>Deleted with the connection</td></tr>
+  <tr><td>Imported and manual accounts</td><td>Until the operator deletes them</td><td>Deleted with all their transactions</td></tr>
+  <tr><td>Encrypted backups</td><td>About two weeks</td><td>Oldest deleted automatically</td></tr>
+  <tr><td>Job logs</td><td>90 days</td><td>Deleted</td></tr>
+  <tr><td>Reports and summaries</td><td>24 months</td><td>Deleted</td></tr>
+  <tr><td>Exports</td><td>Only while needed</td><td>Deleted once used</td></tr>
+  <tr><td>Plaid API credentials</td><td>While the Plaid account is in use</td><td>Rotated and deleted</td></tr>
+</table></div>
+<p>An institution left unused for 12 months is disconnected and its data deleted.</p>
+
+<h2 id="deletion">4. Deletion</h2>
+<h3>Disconnecting one institution</h3>
+<ol>
+  <li>Tallyho asks Plaid to remove the connection, which revokes its credentials. Plaid stops pulling data for it.</li>
+  <li>Tallyho deletes the connection and its credentials.</li>
+  <li>That deletion removes every account, transaction, balance, card or loan term and holding under it.</li>
+  <li>Copies in backups age out within about two weeks.</li>
+</ol>
+<h3>Deleting all data</h3>
+<ol>
+  <li>Disconnect every institution as above, so each connection is revoked at Plaid.</li>
+  <li>Stop Tallyho and its scheduled jobs.</li>
+  <li>Delete the data, backups, logs, reports and any exports.</li>
+  <li>Delete the encryption key, which makes any remaining backup copy unreadable.</li>
+  <li>Delete the Plaid API credentials and rotate them in the Plaid Dashboard.</li>
+</ol>
+<p>A request to delete data, from the operator or from Plaid, is completed within 30 days.</p>
+
+<h2 id="backups">5. Backups, reports and logs</h2>
+<ul>
+  <li><strong>Backups</strong> are taken nightly, encrypted and readable only by the operator. They rotate automatically, so deleted data is gone from them within about two weeks.</li>
+  <li><strong>Backups never leave the computer,</strong> and are never copied to cloud storage. A restore brings back only what that backup held, and any institution disconnected since then is disconnected again straight after.</li>
+  <li><strong>Reports</strong> are reviewed and pruned each quarter. Anything older than 24 months is deleted.</li>
+  <li><strong>Logs</strong> hold job status, not financial data, and are cleared each quarter, keeping the last 90 days.</li>
+</ul>
+
+<h2 id="disposal">6. Device disposal</h2>
+<p>Before the computer is sold, given away, repaired by a third party or retired, all Tallyho data is deleted as above and the computer is fully erased, which destroys its disk-encryption key.</p>
+<p>If the computer is lost or stolen, the operator rotates the Plaid API credentials within 24 hours. Connection credentials are useless without them, so no one holding the device can pull new data, and the data already on it stays protected by disk encryption.</p>
+
+<h2 id="ownership">7. Ownership and review</h2>
+<ul>
+  <li>The operator owns this policy and is responsible for following it.</li>
+  <li>It is reviewed once a year, and whenever Tallyho starts storing a new kind of data or in a new place.</li>
+  <li>Plaid's own retention of the data it collects is governed by the <a href="https://plaid.com/legal/#end-user-privacy-policy">Plaid End User Privacy Policy</a>, not by this policy.</li>
+  <li>Any exception is written down with its reason and an end date.</li>
+</ul>
+
+<p class="meta">Approved by Mathew Gutierrez, Policy Owner, October 29, 2026</p>
+</main>
+<footer class="wrap">
+  <p>Tallyho is a private application operated by Mathew Gutierrez. It is not offered to the public.</p>
+  <p>Questions: <a href="https://github.com/gutierrezm00/tallyho/issues">open an issue</a>. Security reports: <a href="https://github.com/gutierrezm00/tallyho/security/advisories/new">report privately</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noai, noimageai">
+<title>Information Security Policy · Tallyho</title>
+<meta name="description" content="Tallyho is a private, single-user personal finance application. Its privacy policy and security policies.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">T</span>Tallyho</a>
+    <nav aria-label="Pages"><a href="index.html">About</a><a href="privacy.html">Privacy</a><a href="security.html" aria-current="page">Security</a><a href="access-control.html">Access control</a><a href="retention.html">Retention</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<h1>Information Security Policy</h1>
+<p class="meta">Version 1.1 · Effective October 29, 2026 · Next review October 2027 · Policy owner: Mathew Gutierrez, sole operator and security owner</p>
+
+<p class="note">This is the public summary of Tallyho's Information Security Policy. It describes every control the full policy requires. Operational details that would only help an attacker, such as file locations, system names and exact limits, are kept in the private version.</p>
+
+<h2 id="purpose">1. Purpose</h2>
+<p>This policy sets out how Tallyho protects the consumer financial data it receives through Plaid. It is the governing document for Tallyho's access control, data retention and privacy commitments.</p>
+
+<h2 id="scope">2. Scope</h2>
+<p>Tallyho is a single-user application. It runs only on the operator's own computer and serves no other customers. The only consumer whose data it holds is the operator. This policy covers:</p>
+<ul>
+  <li>the application code, kept in a private source-code repository</li>
+  <li>the Tallyho data store and its encrypted backups</li>
+  <li>Plaid API credentials and the credentials Plaid issues for each connected institution</li>
+  <li>every account that can reach any of the above: the operator's computer login, the Plaid Dashboard and the source-code host</li>
+</ul>
+
+<h2 id="roles">3. Roles and responsibilities</h2>
+<p>Tallyho has one person, who holds every role: security owner, developer, administrator, and the only data subject. Tallyho has no employees, contractors or third-party administrators, and no one else is given access to its systems or data.</p>
+<p>If that ever changes, this policy will be revised <strong>before</strong> access is granted, adding named roles, least-privilege access and an offboarding procedure that removes access on the day a person leaves. See <a href="access-control.html">Access Control</a>.</p>
+
+<h2 id="classification">4. Data classification</h2>
+<div class="table"><table>
+  <tr><th>Class</th><th>Examples</th><th>Handling</th></tr>
+  <tr><td><strong>Secret</strong></td><td>Plaid API credentials, per-institution connection credentials, encryption keys</td><td>Never in source control, logs, screenshots or messages. Encrypted at rest.</td></tr>
+  <tr><td><strong>Confidential</strong></td><td>Balances, transactions, holdings, liabilities, and reports built from them</td><td>Stored only on the operator's encrypted computer. Shared only as the <a href="privacy.html">Privacy Policy</a> describes.</td></tr>
+  <tr><td><strong>Internal</strong></td><td>Application source code</td><td>Private repository</td></tr>
+</table></div>
+
+<h2 id="access-control">5. Access control policy</h2>
+<p>This section is Tallyho's access control policy. The roles and the permissions each one holds are defined in <a href="access-control.html">Access Control</a>.</p>
+
+<h3>5.1 Principles</h3>
+<ul>
+  <li><strong>Deny by default.</strong> No one has access to any Tallyho system or data unless this policy grants it.</li>
+  <li><strong>Least privilege.</strong> Each role gets only the permissions its task needs. Day-to-day use of the application does not need the Plaid credentials or encryption keys.</li>
+  <li><strong>Personal accounts.</strong> Every account belongs to one named person. Accounts and credentials are never shared.</li>
+  <li><strong>Separate environments.</strong> Development and testing use Plaid's sandbox and made-up demo data only. Production credentials are held only by the owner and administrator roles.</li>
+</ul>
+
+<h3>5.2 Network access</h3>
+<ul>
+  <li>The Tallyho interface listens only on the computer's internal loopback interface and is never exposed to the internet or the local network.</li>
+  <li>Requests from other websites open in the browser are refused, which blocks cross-site requests and DNS-rebinding attacks.</li>
+  <li>Tallyho provides no remote access. No VPN, port forwarding, tunnel or remote-desktop service may be set up to reach it.</li>
+  <li>The only outbound connections that carry consumer data go to Plaid, over TLS.</li>
+</ul>
+
+<h3>5.3 Authentication</h3>
+<ul>
+  <li><strong>Passwords.</strong> Every account in scope uses a unique, long password kept in a password manager and never reused.</li>
+  <li><strong>Multi-factor authentication on internal systems.</strong> MFA is required on every account that can reach consumer data or the credentials that fetch it: the Plaid Dashboard, the operator's platform account and the source-code host. The computer login uses a password plus biometric unlock backed by secure hardware.</li>
+  <li><strong>Multi-factor authentication on the application.</strong> The Tallyho interface, where Plaid Link runs, requires a password plus a time-based one-time code from an authenticator app before it shows any data or opens Plaid Link. The server itself refuses every data and Link request without a signed-in session. Sessions expire after a period of inactivity and after a maximum lifetime, each code works only once, repeated failed attempts temporarily lock sign-in, and single-use recovery codes cover a lost authenticator.</li>
+  <li><strong>Device lock.</strong> The computer requires a password to log in and to wake from sleep, and locks automatically after a short idle period.</li>
+</ul>
+
+<h3>5.4 Privileged access</h3>
+<ul>
+  <li>Privileged actions are rotating Plaid credentials, moving to production, enabling Plaid products, exporting or replacing encryption keys, and restoring backups. Only the owner and administrator roles may perform them.</li>
+  <li>Secrets are never displayed in the interface, returned by the application, written to logs, or pasted into messages, tickets or screenshots.</li>
+  <li>Tallyho and its scheduled jobs run as a standard user, never with administrator rights.</li>
+</ul>
+
+<h3>5.5 Granting, changing and removing access</h3>
+<ul>
+  <li>Access is granted only by the owner, only to a named person, and only after the access control document records the role and the reason.</li>
+  <li>When a person's role changes or they leave, the owner removes their access <strong>on the same day</strong> and rotates every secret they could have seen.</li>
+  <li>Tallyho currently has no one to grant access to, so no access has ever been granted or removed.</li>
+</ul>
+
+<h3>5.6 Review and exceptions</h3>
+<ul>
+  <li>All access is reviewed at each annual policy review, whenever a device, account or credential changes, and after any incident. Anything this policy doesn't allow is removed straight away.</li>
+  <li>There are no exceptions. Any exception needs the owner's written approval, with a reason and an end date.</li>
+</ul>
+
+<h2 id="encryption">6. Encryption</h2>
+<ul>
+  <li><strong>At rest.</strong> The computer's disk is fully encrypted. Connection credentials issued by Plaid are encrypted a second time with authenticated encryption, using a key held in the operating system's protected credential store rather than next to the data. Backups are encrypted the same way. The application password is stored only as a salted, memory-hard hash.</li>
+  <li><strong>In transit.</strong> All communication with Plaid uses TLS 1.2 or later through Plaid's official client library, with certificate verification on. Traffic between the browser and the Tallyho interface never leaves the computer.</li>
+</ul>
+
+<h2 id="secrets">7. Secrets management</h2>
+<ul>
+  <li>Plaid credentials are stored readable only by the operator's account and are excluded from source control.</li>
+  <li>Connection credentials are never logged, displayed or returned by the application.</li>
+  <li>If a secret may have been exposed, it is rotated straight away and the incident procedure in section 11 applies.</li>
+</ul>
+
+<h2 id="retention">8. Data retention and deletion</h2>
+<p>Tallyho stores only what its features need. Disconnecting an institution revokes its access at Plaid and deletes its data, and deleted data leaves the rotating encrypted backups within about two weeks. See the <a href="retention.html">Data Retention and Deletion Policy</a>.</p>
+
+<h2 id="development">9. Secure development</h2>
+<ul>
+  <li>Source code lives in a private repository. Secrets and data files are excluded from it.</li>
+  <li>Changes pass the automated test suite before use.</li>
+  <li>Dependencies come from the official package index into an isolated environment and are reviewed and updated at least every quarter.</li>
+  <li>New Plaid products are enabled deliberately, and the application only requests data for products a connection already has.</li>
+</ul>
+
+<h2 id="endpoint">10. Endpoint security</h2>
+<ul>
+  <li>Automatic operating-system security updates are on.</li>
+  <li>The system firewall is on.</li>
+  <li>No one but the operator uses the computer.</li>
+</ul>
+
+<h2 id="incidents">11. Incident response</h2>
+<p>If data or credentials may have been exposed, the operator:</p>
+<ol>
+  <li><strong>Contains it:</strong> rotates the Plaid credentials, removes the affected connections and stops the application.</li>
+  <li><strong>Assesses it:</strong> works out what was exposed, when and how.</li>
+  <li><strong>Notifies:</strong> informs Plaid at security@plaid.com within 72 hours of confirming an incident that involves Plaid data or credentials.</li>
+  <li><strong>Recovers:</strong> fixes the cause, reconnects the institutions and restores from an encrypted backup if needed.</li>
+  <li><strong>Records it:</strong> writes up the incident and the fix in the policy's review notes.</li>
+</ol>
+
+<h2 id="vendors">12. Vendor management</h2>
+<p>Plaid is the only vendor that supplies consumer data. Tallyho uses no hosting provider, analytics service or other third-party processor of consumer data. The only other recipient is the one disclosed in the <a href="privacy.html#share">Privacy Policy</a>.</p>
+
+<h2 id="review">13. Review and changes</h2>
+<p>This policy is reviewed every year and updated whenever Tallyho's architecture, data or people change. Each version is kept in version control.</p>
+
+<p class="meta">Approved by Mathew Gutierrez, Policy Owner, October 29, 2026</p>
+</main>
+<footer class="wrap">
+  <p>Tallyho is a private application operated by Mathew Gutierrez. It is not offered to the public.</p>
+  <p>Questions: <a href="https://github.com/gutierrezm00/tallyho/issues">open an issue</a>. Security reports: <a href="https://github.com/gutierrezm00/tallyho/security/advisories/new">report privately</a>.</p>
+</footer>
+</body>
+</html>

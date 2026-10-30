@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noai, noimageai">
+<title>Tallyho</title>
+<meta name="description" content="Tallyho is a private, single-user personal finance application. Its privacy policy and security policies.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">T</span>Tallyho</a>
+    <nav aria-label="Pages"><a href="index.html" aria-current="page">About</a><a href="privacy.html">Privacy</a><a href="security.html">Security</a><a href="access-control.html">Access control</a><a href="retention.html">Retention</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<h1>Tallyho</h1>
+<p class="lede">A private, single-user personal finance application. It brings one person's bank, card, loan and investment accounts into one place, so he can see where his money is and where it goes.</p>
+
+<div class="note">Tallyho is not a product or a service. It can't be downloaded, signed up for or used by anyone else. The only person whose financial data it holds is its operator, Mathew Gutierrez.</div>
+
+<h2>What it does</h2>
+<ul>
+  <li><strong>One view of every account.</strong> Net worth, balances and history across checking, savings, credit cards, loans, brokerage and retirement accounts.</li>
+  <li><strong>Spending and cash flow.</strong> Where the money went each month, recurring charges and subscriptions, and how this month compares with a normal one.</li>
+  <li><strong>Planning.</strong> Budgets, savings goals, a short-range cash-flow forecast and a debt payoff planner.</li>
+  <li><strong>Alerts.</strong> Large or unexpected charges, new subscriptions, price increases and low balances.</li>
+</ul>
+
+<h2>How it connects to banks</h2>
+<p>Tallyho uses <a href="https://plaid.com/">Plaid</a> to connect to financial institutions. Bank usernames and passwords are entered into Plaid Link and go to Plaid. Tallyho never sees or stores them. Tallyho receives read-only account data: balances, transactions, card and loan terms, and investment holdings. It cannot move money.</p>
+
+<h2>Security at a glance</h2>
+<div class="cards">
+  <div class="card"><h3>Runs on one computer</h3><p>All data stays on the operator's own encrypted computer. There is no Tallyho server, cloud database or hosted copy.</p></div>
+  <div class="card"><h3>Not on the internet</h3><p>The application can be reached only from that computer, never from the network or other websites.</p></div>
+  <div class="card"><h3>Multi-factor sign-in</h3><p>A password plus a one-time code from an authenticator app is required before any data is shown or a bank can be connected.</p></div>
+  <div class="card"><h3>Encrypted</h3><p>Full-disk encryption, plus a second layer of encryption for bank connection credentials and backups. All traffic to Plaid uses TLS.</p></div>
+  <div class="card"><h3>Deleted on disconnect</h3><p>Disconnecting a bank revokes its access at Plaid and deletes its data. Backups age out within two weeks.</p></div>
+  <div class="card"><h3>Never sold or shared</h3><p>No advertising, analytics or tracking. Data is shared only as the privacy policy describes.</p></div>
+</div>
+
+<h2>Policies</h2>
+<div class="cards">
+  <a class="card" href="privacy.html"><h3>Privacy Policy</h3><p>What is collected, how it is used and shared, and your choices.</p></a>
+  <a class="card" href="security.html"><h3>Information Security Policy</h3><p>How data is protected, including the access control policy.</p></a>
+  <a class="card" href="access-control.html"><h3>Access Control</h3><p>Roles, permissions, and how access is granted and removed.</p></a>
+  <a class="card" href="retention.html"><h3>Data Retention and Deletion</h3><p>How long each kind of data is kept and how it is deleted.</p></a>
+</div>
+</main>
+<footer class="wrap">
+  <p>Tallyho is a private application operated by Mathew Gutierrez. It is not offered to the public.</p>
+  <p>Questions: <a href="https://github.com/gutierrezm00/tallyho/issues">open an issue</a>. Security reports: <a href="https://github.com/gutierrezm00/tallyho/security/advisories/new">report privately</a>.</p>
+</footer>
+</body>
+</html>

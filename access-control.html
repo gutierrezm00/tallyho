@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noai, noimageai">
+<title>Access Control · Tallyho</title>
+<meta name="description" content="Tallyho is a private, single-user personal finance application. Its privacy policy and security policies.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">T</span>Tallyho</a>
+    <nav aria-label="Pages"><a href="index.html">About</a><a href="privacy.html">Privacy</a><a href="security.html">Security</a><a href="access-control.html" aria-current="page">Access control</a><a href="retention.html">Retention</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<h1>Access Control</h1>
+<p class="meta">Role-based access control · Version 1.0 · Effective October 29, 2026 · Next review October 2027, or before anyone else is given access</p>
+
+<p>This document defines who may access Tallyho's systems and consumer data, in what role, and with which permissions. Access is granted by role, never to a person directly, and each role gets only the permissions its job needs. It applies the access control policy in section 5 of the <a href="security.html#access-control">Information Security Policy</a>.</p>
+
+<h2 id="current">1. Current state</h2>
+<p>Tallyho has one person, the operator, who holds every role below. No employee, contractor, vendor or other user holds any role. Separating the roles still matters: it shows which permission each task actually needs, and it is the structure anyone new would be added to. Nobody gets everything by default.</p>
+
+<h2 id="resources">2. Protected resources</h2>
+<div class="table"><table>
+  <tr><th>Resource</th><th>Classification</th></tr>
+  <tr><td>Financial data: accounts, balances, transactions, holdings, liabilities</td><td>Confidential</td></tr>
+  <tr><td>Encrypted backups</td><td>Confidential</td></tr>
+  <tr><td>Reports built from the financial data</td><td>Confidential</td></tr>
+  <tr><td>Connection credentials issued by Plaid</td><td>Secret</td></tr>
+  <tr><td>Encryption keys</td><td>Secret</td></tr>
+  <tr><td>Plaid API credentials and Plaid Dashboard</td><td>Secret</td></tr>
+  <tr><td>Application source code</td><td>Internal</td></tr>
+  <tr><td>The computer that hosts all of the above</td><td>Secret</td></tr>
+</table></div>
+
+<h2 id="roles">3. Roles</h2>
+<div class="table"><table>
+  <tr><th>Role</th><th>Job</th></tr>
+  <tr><td><strong>Owner</strong></td><td>Approves policies, grants and removes roles, holds production access</td></tr>
+  <tr><td><strong>Administrator</strong></td><td>Manages Plaid credentials, encryption keys, backups and scheduled jobs</td></tr>
+  <tr><td><strong>Developer</strong></td><td>Changes the code, using Plaid's sandbox and made-up demo data only</td></tr>
+  <tr><td><strong>User</strong></td><td>Connects institutions through Plaid Link and reads their own data in the interface</td></tr>
+  <tr><td><strong>Automated job</strong></td><td>Scheduled sync, backup and summary jobs, with only the access each task needs</td></tr>
+</table></div>
+<p>Today the operator holds the owner, administrator, developer and user roles.</p>
+
+<h2 id="matrix">4. Permissions</h2>
+<p><strong>Full</strong> = read and change. <strong>Use</strong> = the role triggers an action that uses the resource without seeing it. <strong>—</strong> = no access.</p>
+<div class="table"><table>
+  <tr><th>Resource</th><th>Owner</th><th>Admin</th><th>Developer</th><th>User</th><th>Job</th></tr>
+  <tr><td>Financial data</td><td>Full</td><td>Full</td><td>— (demo data only)</td><td>Read, plus corrections</td><td>Write (sync)</td></tr>
+  <tr><td>Backups</td><td>Full</td><td>Create, restore</td><td>—</td><td>—</td><td>Create</td></tr>
+  <tr><td>Reports</td><td>Full</td><td>Read</td><td>—</td><td>Read</td><td>Create</td></tr>
+  <tr><td>Connection credentials</td><td>Use</td><td>Use</td><td>—</td><td>Use (via Link and sync)</td><td>Use</td></tr>
+  <tr><td>Encryption keys</td><td>Full</td><td>Full</td><td>—</td><td>Use (via the app)</td><td>Use</td></tr>
+  <tr><td>Plaid credentials</td><td>Full</td><td>Full</td><td>Sandbox only</td><td>—</td><td>Use</td></tr>
+  <tr><td>Plaid Dashboard</td><td>Full</td><td>Keys and products</td><td>Sandbox only</td><td>—</td><td>—</td></tr>
+  <tr><td>Source code</td><td>Full</td><td>Read</td><td>Full</td><td>—</td><td>—</td></tr>
+</table></div>
+<ul>
+  <li><strong>Nobody reads secrets through the application.</strong> Connection credentials are never displayed, logged or returned by it.</li>
+  <li><strong>Developers never touch real data.</strong> Development uses Plaid's sandbox, demo data and test fixtures.</li>
+  <li><strong>Automated jobs get only what their task needs,</strong> and none of them can change policies or keys.</li>
+</ul>
+
+<h2 id="enforcement">5. How roles are enforced</h2>
+<div class="table"><table>
+  <tr><th>Control</th><th>Enforces</th></tr>
+  <tr><td>Personal computer account with password, biometric unlock and auto-lock</td><td>Only the operator can reach any resource</td></tr>
+  <tr><td>Full-disk encryption</td><td>Nothing is readable off the device</td></tr>
+  <tr><td>Owner-only file permissions</td><td>No other account on the computer can read the data or credentials</td></tr>
+  <tr><td>Keys held in the operating system's protected credential store</td><td>Keys are never stored next to the data they protect</td></tr>
+  <tr><td>Interface reachable only from the computer itself, with cross-site requests refused</td><td>The user role can't be reached from the network or other websites</td></tr>
+  <tr><td>Password plus one-time-code sign-in on the interface</td><td>The user role is authenticated with MFA, separately from the computer login</td></tr>
+  <tr><td>Plaid Dashboard with MFA and a single team member</td><td>Plaid credentials are held by the owner only</td></tr>
+  <tr><td>Separate sandbox and production credentials</td><td>Development can't reach real institutions</td></tr>
+</table></div>
+
+<h2 id="lifecycle">6. Granting and removing access</h2>
+<p><strong>Before</strong> anyone other than the operator is given any role:</p>
+<ol>
+  <li>The owner updates this document with the person, the role and the reason, giving no more than the permissions above allow.</li>
+  <li>The person gets their own accounts with MFA. Accounts are never shared.</li>
+  <li>Developer access uses sandbox credentials and demo data only.</li>
+</ol>
+<p>When a person's role changes or they leave, the owner, <strong>on the same day</strong>:</p>
+<ol>
+  <li>Removes every account and seat they were given.</li>
+  <li>Rotates every secret they could have seen.</li>
+  <li>Records the change in this document's history.</li>
+</ol>
+<p>Access is reviewed at each annual policy review and whenever an account, device or credential changes.</p>
+
+<h2 id="exceptions">7. Exceptions</h2>
+<p>There are no exceptions. Any exception needs the owner's written approval, recorded with a reason and an end date.</p>
+
+<p class="meta">Approved by Mathew Gutierrez, Policy Owner, October 29, 2026</p>
+</main>
+<footer class="wrap">
+  <p>Tallyho is a private application operated by Mathew Gutierrez. It is not offered to the public.</p>
+  <p>Questions: <a href="https://github.com/gutierrezm00/tallyho/issues">open an issue</a>. Security reports: <a href="https://github.com/gutierrezm00/tallyho/security/advisories/new">report privately</a>.</p>
+</footer>
+</body>
+</html>

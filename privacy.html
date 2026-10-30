@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noai, noimageai">
+<title>Privacy Policy · Tallyho</title>
+<meta name="description" content="Tallyho is a private, single-user personal finance application. Its privacy policy and security policies.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">T</span>Tallyho</a>
+    <nav aria-label="Pages"><a href="index.html">About</a><a href="privacy.html" aria-current="page">Privacy</a><a href="security.html">Security</a><a href="access-control.html">Access control</a><a href="retention.html">Retention</a></nav>
+  </div>
+</header>
+<main class="wrap">
+<h1>Privacy Policy</h1>
+<p class="meta">Version 1.0 · Effective October 29, 2026</p>
+
+<h2 id="who">1. Who we are</h2>
+<p>Tallyho is a personal finance application run by one person, Mathew Gutierrez ("the operator"), on his own computer. It is not offered to the public. It cannot be downloaded, signed up for or used by anyone else, and the operator is the only person whose financial data it holds.</p>
+<p>This policy explains what Tallyho collects, how it uses and protects that data, who it is shared with, how long it is kept and how it is deleted.</p>
+
+<h2 id="collect">2. What we collect</h2>
+<p>When the operator connects a financial institution through Plaid, Tallyho receives:</p>
+<ul>
+  <li><strong>Account details:</strong> account names and types, the last four digits of account numbers, and the institution's name</li>
+  <li><strong>Balances:</strong> current and available balances, and credit limits</li>
+  <li><strong>Transactions:</strong> date, amount, merchant name, category and pending status</li>
+  <li><strong>Liabilities:</strong> for credit cards and loans, the interest rate, minimum payment, statement balance and payment due date</li>
+  <li><strong>Investments:</strong> holdings, quantities, values, cost basis and security details</li>
+</ul>
+<p>Tallyho also stores information the operator enters himself: categories and corrections, budgets, goals, manually tracked accounts, and statement files imported from a bank.</p>
+<p>Tallyho does <strong>not</strong> collect or store bank usernames or passwords. Those are entered into Plaid Link and go to Plaid, never to Tallyho. Tallyho does not request full account or routing numbers. It uses no advertising, analytics or tracking of any kind. Its only cookie is the sign-in session for its own interface.</p>
+
+<h2 id="use">3. How we use it</h2>
+<p>The data is used only to show the operator his own finances: net worth, cash flow, spending, recurring charges, budgets, goals, debt payoff plans, a cash-flow forecast, investment summaries and alerts.</p>
+<p>It is never sold, rented, used for advertising, or used to make credit or eligibility decisions.</p>
+
+<h2 id="plaid">4. Plaid</h2>
+<p>Tallyho uses Plaid Inc. to connect to financial institutions. By connecting an account, the operator agrees to Plaid's handling of that data under the <a href="https://plaid.com/legal/#end-user-privacy-policy">Plaid End User Privacy Policy</a>. Plaid receives the institution credentials entered into Plaid Link and returns account data to Tallyho.</p>
+
+<h2 id="share">5. Who we share it with</h2>
+<p>Tallyho shares data only with:</p>
+<ul>
+  <li><strong>Plaid</strong>, to fetch account data, as described above.</li>
+  <li><strong>Anthropic</strong>, only when the operator himself asks Claude, an AI assistant, to write a financial report. A summary of the data is then sent to Anthropic to produce that report, under <a href="https://www.anthropic.com/legal/privacy">Anthropic's privacy policy</a>. Nothing is sent to Anthropic automatically.</li>
+</ul>
+<p>Data may also be disclosed if the law requires it. Tallyho shares nothing with any other party.</p>
+
+<h2 id="protect">6. Where it is stored and how it is protected</h2>
+<ul>
+  <li>All data is stored on the operator's own computer, whose disk is fully encrypted. It is not stored on any Tallyho server or cloud service.</li>
+  <li>Bank connection credentials issued by Plaid are encrypted again with a key held in the operating system's protected credential store. Backups are encrypted the same way.</li>
+  <li>The data can be read only by the operator's own user account on that computer.</li>
+  <li>The Tallyho interface is reachable only from that computer, not from the internet or the local network, and it requires a password plus a one-time code from an authenticator app.</li>
+  <li>All communication with Plaid uses encrypted HTTPS connections.</li>
+</ul>
+<p>The full controls are set out in the <a href="security.html">Information Security Policy</a>.</p>
+
+<h2 id="retain">7. How long we keep it, and how it is deleted</h2>
+<ul>
+  <li>Data is kept while an institution stays connected, so the operator can see his history.</li>
+  <li>Disconnecting an institution revokes its access at Plaid and deletes that institution's accounts, transactions and related data.</li>
+  <li>Encrypted backups are rotated automatically, so deleted data leaves the backups within about two weeks.</li>
+  <li>If Tallyho is retired, every connection is removed through Plaid, and the data, backups and encryption key are deleted.</li>
+</ul>
+<p>Details are in the <a href="retention.html">Data Retention and Deletion Policy</a>.</p>
+
+<h2 id="choices">8. Your choices</h2>
+<p>The operator, as the only person whose data Tallyho holds, can at any time:</p>
+<ul>
+  <li>see all of the data Tallyho holds, in the interface or by exporting it</li>
+  <li>correct categories and other details</li>
+  <li>disconnect any institution, which deletes its data as described in section 7</li>
+  <li>delete all Tallyho data</li>
+</ul>
+
+<h2 id="children">9. Children</h2>
+<p>Tallyho is not directed at children and does not knowingly hold data about anyone under 18.</p>
+
+<h2 id="changes">10. Changes to this policy</h2>
+<p>This policy is reviewed at least once a year and whenever Tallyho starts collecting, using or sharing data in a new way. Changes take effect when the updated version is posted here, with a new effective date.</p>
+
+<h2 id="contact">11. Contact</h2>
+<p>Questions about this policy can be sent to Mathew Gutierrez, the operator of Tallyho, by <a href="https://github.com/gutierrezm00/tallyho/issues">opening an issue</a> on this site's repository. Please don't include any personal or financial information in an issue; it is public. To report a security concern privately, use <a href="https://github.com/gutierrezm00/tallyho/security/advisories/new">private vulnerability reporting</a>.</p>
+</main>
+<footer class="wrap">
+  <p>Tallyho is a private application operated by Mathew Gutierrez. It is not offered to the public.</p>
+  <p>Questions: <a href="https://github.com/gutierrezm00/tallyho/issues">open an issue</a>. Security reports: <a href="https://github.com/gutierrezm00/tallyho/security/advisories/new">report privately</a>.</p>
+</footer>
+</body>
+</html>
